@@ -28,13 +28,27 @@ addBookToLibrary("Bible", "God", 454);
 function renderBooks(arr) {
   const libraryHTML = document.getElementById("myLibrary");
   arr.forEach((book) => {
-    libraryHTML.innerText += book.name;
+    libraryHTML.innerHTML += `
+    <h2>${book.name}</h2>
+    <p>Written By: ${book.author}</p>
+    <p>${book.pages} Pages</p>
+    `;
   });
 }
 
 renderBooks(myLibrary);
 
 // 5. Create a "New Book" button that takes in inputs so the user can input a book into the array
+
+const newBookBtn = document.getElementById("newBook");
+newBookBtn.addEventListener("click", () => {
+  document.getElementById("newBookForm").showModal();
+});
+
+const closeBtn = document.getElementById("closeBtn");
+closeBtn.addEventListener("click", () => {
+  document.getElementById("newBookForm").close();
+});
 
 //6. Add a button on each book's display to remove the book from the library. You will probably need to make a "RemoveBookFunction" that takes the item out of the array.
 
