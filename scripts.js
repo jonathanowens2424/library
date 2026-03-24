@@ -1,26 +1,20 @@
-// 1. Create an array that stores books
 const form = document.querySelector("form");
-const myLibrary = [];
-
-// 2. Create a constructor that creates book object.
+let myLibrary = [];
 
 function Book(name, author, pages) {
   this.name = name;
   this.author = author;
   this.pages = pages;
   this.id = 0;
+  this.read = false;
 }
-// 3. Create a function that takes in parameters that uses the book constructor and has an unique id
 
 function addBookToLibrary(name, author, pages) {
   let book = new Book(name, author, pages);
   book.id = crypto.randomUUID();
   myLibrary.push(book);
   renderBooks(myLibrary);
-  console.log(myLibrary);
 }
-
-// 4. Write a function that looks through the myLibrary Array and presents them into the HTML.
 
 function renderBooks(arr) {
   let libraryHTML = document.getElementById("myLibrary");
@@ -30,11 +24,12 @@ function renderBooks(arr) {
     <h2>${book.name}</h2>
     <p>Written By: ${book.author}</p>
     <p>${book.pages} Pages</p>
+    <button onclick="removeBook('${book.id}')">Remove Book</button>
+    <button onclick="toggleReadStatus('${book.id}')">${book.read ? `Finished` : `Not Finished`}</button>
+    
     `;
   });
 }
-
-// 5. Create a "New Book" button that takes in inputs so the user can input a book into the array
 
 const newBookBtn = document.getElementById("newBook");
 newBookBtn.addEventListener("click", () => {
@@ -58,6 +53,20 @@ submitBtn.addEventListener("click", (event) => {
   form.reset();
 });
 
-//6. Add a button on each book's display to remove the book from the library. You will probably need to make a "RemoveBookFunction" that takes the item out of the array.
+function removeBook(id) {
+  let newLibrary = myLibrary.filter((book) => book.id !== id);
+  myLibrary = newLibrary;
+  renderBooks(myLibrary);
+}
 
-//7. Add a button that changes a book from Unread to Read.
+function toggleReadStatus(id) {
+  myLibrary.forEach((book) => {
+    if (book.id === id) {
+      book.read = !book.read;
+    } else {
+      return;
+    }
+  });
+
+  renderBooks(myLibrary);
+}
