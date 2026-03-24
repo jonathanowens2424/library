@@ -10,8 +10,18 @@
     <p id="myLibrary"></p>
     <button id="newBook">New Book</button>
     <dialog id="newBookForm">
-      <p>Test</p>
-      <button id="closeBtn">X</button>
+      <form action="" id="form">
+        <label for="bookTitle">Book Title:</label>
+        <input type="text" name="bookTitle" id="bookTitle" required />
+
+        <label for="bookAuthor">Author:</label>
+        <input type="text" name="bookAuthor" id="bookAuthor" required />
+
+        <label for="bookPages">Page Count:</label>
+        <input type="text" name="bookPages" id="bookPages" required />
+        <button id="submitBtn" type="submit">Submit</button>
+      </form>
+      <button type="button" id="closeBtn">X</button>
     </dialog>
     <script src="./scripts.js"></script>
   </body>
